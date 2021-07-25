@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-function Track({ track, getLyrics }) {
+function Track({ track }) {
   return (
     <div className="card">
       <div className="card-body">

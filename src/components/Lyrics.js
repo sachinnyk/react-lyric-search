@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Spinner from "./Spinner";
-function Lyrics(props) {
+function Lyrics() {
+  const history = useHistory();
+  const { id } = useParams();
   const [lyricBody, setLyricBody] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [track, setTrack] = useState([]);
@@ -24,19 +26,21 @@ function Lyrics(props) {
       console.log(data.message);
       setLoading(false);
     };
-    getLyrics(props.match.params.id);
-    getTrackDetails(props.match.params.id);
-    console.log(props.match.params.id);
-  }, [props.match.params.id]);
+    getLyrics(id);
+    getTrackDetails(id);
+  }, []);
 
   if (isLoading) return <Spinner />;
   else
     return (
       <div className="container">
         <h1>Lyrics</h1>
-        <Link to="/" className="btn btn-dark btn-sm mb-2 align-left">
+        {/*<Link to="/" className="btn btn-dark btn-sm mb-2 align-left">
           Back
-        </Link>
+    </Link>*/}
+        <button className="btn btn-dark mb-2 d-flex align-items-left ms-5" onClick={history.goBack}>
+          Back
+        </button>
         <div className="card ">
           <h5 className="card-header">
             {track.track_name} By {track.artist_name}
